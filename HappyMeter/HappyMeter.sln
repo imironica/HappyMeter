@@ -5,7 +5,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyMeter.ConsoleTest", "HappyMeter.ConsoleTest\HappyMeter.ConsoleTest.csproj", "{79F6F065-B87A-4A41-ADC8-8039090B5078}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CognitiveServiceProxy", "CognitiveServiceProxy\CognitiveServiceProxy.csproj", "{1933EB75-88F7-4B1D-A005-63AFD857B6B6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyMeter.CognitiveServiceProxy", "HappyMeter.CognitiveServiceProxy\HappyMeter.CognitiveServiceProxy.csproj", "{1933EB75-88F7-4B1D-A005-63AFD857B6B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
