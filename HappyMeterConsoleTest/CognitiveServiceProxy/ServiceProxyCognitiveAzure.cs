@@ -7,15 +7,18 @@ using System.Threading.Tasks;
 
 namespace CognitiveServiceProxy
 {
-    public class ServiceProxy : IServiceProxy
+    public class ServiceProxyCognitiveAzure : IServiceProxy
     {
         private HttpClient _client;
         private string _apiLink;
         private string _apiKeyName;
         private string _apiKey;
         private string _contentTypeKey = "Content-Type";
+        public ServiceProxyCognitiveAzure()
+        {
+        }
 
-        public ServiceProxy(string apiLink, string apiKeyName, string apiKey)
+        public void SetParameters(string apiLink, string apiKeyName, string apiKey)
         {
             _apiLink = apiLink;
             _apiKeyName = apiKeyName;
@@ -26,6 +29,8 @@ namespace CognitiveServiceProxy
                 BaseAddress = new Uri(apiLink)
             };
         }
+
+        
 
         public string PostJson(string request)
         {

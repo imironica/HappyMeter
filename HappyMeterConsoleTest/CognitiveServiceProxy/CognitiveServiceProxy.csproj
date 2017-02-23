@@ -62,9 +62,11 @@
   <ItemGroup>
     <Compile Include="IServiceProxy.cs" />
     <None Include="License" />
-    <Compile Include="Models\Model.cs" />
+    <Compile Include="Models\FaceEmotion.cs" />
+    <Compile Include="Models\FaceRectangle.cs" />
+    <Compile Include="Models\Score.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ServiceProxy.cs" />
+    <Compile Include="ServiceProxyCognitiveAzure.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
