@@ -1,4 +1,7 @@
 ﻿using CognitiveServiceProxy;
+using HappyMeter.Models;
+using HappyMeter.Services;
+using Newtonsoft.Json;
 using System;
 using System.Configuration;
 using System.IO;
@@ -8,9 +11,11 @@ namespace HappyMeterConsoleTest
     public class MainProgram
     {
         private IServiceProxy _serviceProxy;
-        public MainProgram(IServiceProxy serviceproxy)
+        private IEmotionService _emotionService;
+        public MainProgram(IServiceProxy serviceproxy, IEmotionService emotionService)
         {
             _serviceProxy = serviceproxy;
+            _emotionService = emotionService;
         }
 
         public void Run()
@@ -43,9 +48,6 @@ namespace HappyMeterConsoleTest
 
             _serviceProxy.SetParameters(apiCognitiveEmotionLink, apiKeyName, apiKey);
             
-            if (!Directory.Exists(saveFolder))
-                Directory.CreateDirectory(saveFolder);
-
             var files = Directory.GetFiles(sourceFolder);
             foreach (var file in files)
             {
@@ -53,10 +55,16 @@ namespace HappyMeterConsoleTest
                 byte[] imgdata = System.IO.File.ReadAllBytes(file);
 
                 var response = _serviceProxy.PostImageStream(imgdata);
-                //FaceEmotion[] account = JsonConvert.DeserializeObject<FaceEmotion[]>(response);
-                //var emotionStr = JsonConvert.SerializeObject(response);
-                var filename = Path.Combine(saveFolder, Path.GetFileName(file)) + ".txt";
-                File.WriteAllText(filename, response);
+                FaceEmotion[] emotions = JsonConvert.DeserializeObject<FaceEmotion[]>(response);
+                string lastFolderName = Path.GetFileName(Path.GetDirectoryName(file));
+
+                InfoDTO dto = new InfoDTO()
+                {
+                    Emotions = emotions,
+                    Category = "Web",
+                    Image = file
+                };
+                _emotionService.AddEmotion(dto);
             }
 
         }
@@ -80,12 +88,16 @@ namespace HappyMeterConsoleTest
 
             var jsonPost = "{ \"url\": \"" + imageLink + "\" }";
             var response = _serviceProxy.PostJson(jsonPost);
-            //FaceEmotion[] account = JsonConvert.DeserializeObject<FaceEmotion[]>(response);
-            //var emotionStr = JsonConvert.SerializeObject(response);
-            if (!Directory.Exists(saveFolder))
-                Directory.CreateDirectory(saveFolder);
-            var filename = Path.Combine(saveFolder, file) + ".txt";
-            File.WriteAllText(filename, response);
+            FaceEmotion[] emotions = JsonConvert.DeserializeObject<FaceEmotion[]>(response);
+
+  
+            InfoDTO dto = new InfoDTO()
+            {
+                Emotions = emotions,
+                Category = "Web",
+                Image = file
+            };
+            _emotionService.AddEmotion(dto);
         }
 
         private void ShowOptions()

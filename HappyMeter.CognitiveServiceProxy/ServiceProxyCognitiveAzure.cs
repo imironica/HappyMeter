@@ -29,9 +29,7 @@ namespace CognitiveServiceProxy
                 BaseAddress = new Uri(apiLink)
             };
         }
-
-        
-
+ 
         public string PostJson(string request)
         {
             string result = string.Empty;

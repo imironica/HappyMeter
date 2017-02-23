@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CognitiveServiceProxy.Models
+namespace HappyMeter.Models
 {
     [JsonObject(Title = "Facerectangle")]
     public class FaceRectangle

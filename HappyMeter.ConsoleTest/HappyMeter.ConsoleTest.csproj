@@ -73,6 +73,14 @@
       <Project>{1933eb75-88f7-4b1d-a005-63afd857b6b6}</Project>
       <Name>CognitiveServiceProxy</Name>
     </ProjectReference>
+    <ProjectReference Include="..\HappyMeter.Models\HappyMeter.Models.csproj">
+      <Project>{5A36FD35-1712-48A3-A05C-30BE247E3713}</Project>
+      <Name>HappyMeter.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HappyMeter.Services\HappyMeter.Services.csproj">
+      <Project>{a7b4b36d-09fb-4252-a544-1dbd43fefc6a}</Project>
+      <Name>HappyMeter.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
