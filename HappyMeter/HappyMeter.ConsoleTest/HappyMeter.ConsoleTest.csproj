@@ -69,7 +69,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CognitiveServiceProxy\CognitiveServiceProxy.csproj">
+    <ProjectReference Include="..\HappyMeter.CognitiveServiceProxy\HappyMeter.CognitiveServiceProxy.csproj">
       <Project>{1933eb75-88f7-4b1d-a005-63afd857b6b6}</Project>
       <Name>CognitiveServiceProxy</Name>
     </ProjectReference>
