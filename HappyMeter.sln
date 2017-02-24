@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26206.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyMeter.ConsoleTest", "HappyMeter.ConsoleTest\HappyMeter.ConsoleTest.csproj", "{79F6F065-B87A-4A41-ADC8-8039090B5078}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyMeter.WebApi", "HappyMeter.WebApi\HappyMeter.WebApi.csproj", "{B6D93117-A48B-42BF-8215-DDCC82B9038A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyMeter.Web", "HappyMeter.Web\HappyMeter.Web.csproj", "{07EEDDE5-E600-4762-ACBF-7538E10A48E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyMeter.Services", "HappyMeter.Services\HappyMeter.Services.csproj", "{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HappyMeter.Models", "HappyMeter.Models\HappyMeter.Models.csproj", "{5A36FD35-1712-48A3-A05C-30BE247E3713}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,30 @@ Global
 		{07EEDDE5-E600-4762-ACBF-7538E10A48E3}.Release|x64.Build.0 = Release|x64
 		{07EEDDE5-E600-4762-ACBF-7538E10A48E3}.Release|x86.ActiveCfg = Release|x86
 		{07EEDDE5-E600-4762-ACBF-7538E10A48E3}.Release|x86.Build.0 = Release|x86
+		{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}.Debug|x64.Build.0 = Debug|Any CPU
+		{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}.Debug|x86.Build.0 = Debug|Any CPU
+		{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}.Release|x64.ActiveCfg = Release|Any CPU
+		{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}.Release|x64.Build.0 = Release|Any CPU
+		{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}.Release|x86.ActiveCfg = Release|Any CPU
+		{A7B4B36D-09FB-4252-A544-1DBD43FEFC6A}.Release|x86.Build.0 = Release|Any CPU
+		{5A36FD35-1712-48A3-A05C-30BE247E3713}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A36FD35-1712-48A3-A05C-30BE247E3713}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A36FD35-1712-48A3-A05C-30BE247E3713}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5A36FD35-1712-48A3-A05C-30BE247E3713}.Debug|x64.Build.0 = Debug|Any CPU
+		{5A36FD35-1712-48A3-A05C-30BE247E3713}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5A36FD35-1712-48A3-A05C-30BE247E3713}.Debug|x86.Build.0 = Debug|Any CPU
+		{5A36FD35-1712-48A3-A05C-30BE247E3713}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A36FD35-1712-48A3-A05C-30BE247E3713}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A36FD35-1712-48A3-A05C-30BE247E3713}.Release|x64.ActiveCfg = Release|Any CPU
+		{5A36FD35-1712-48A3-A05C-30BE247E3713}.Release|x64.Build.0 = Release|Any CPU
+		{5A36FD35-1712-48A3-A05C-30BE247E3713}.Release|x86.ActiveCfg = Release|Any CPU
+		{5A36FD35-1712-48A3-A05C-30BE247E3713}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
