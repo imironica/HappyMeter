@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="EmotionService.cs" />
     <Compile Include="EmotionFileService.cs" />
+    <Compile Include="MDRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

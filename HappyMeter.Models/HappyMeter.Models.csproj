@@ -44,8 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DTO\Entity.cs" />
     <Compile Include="Interfaces\IEmotionService.cs" />
-    <Compile Include="EmotionModels\InfoDTO.cs" />
+    <Compile Include="DTO\InfoDTO.cs" />
     <Compile Include="EmotionModels\FaceEmotion.cs" />
     <Compile Include="EmotionModels\FaceRectangle.cs" />
     <Compile Include="EmotionModels\Score.cs" />
@@ -54,9 +55,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="DTO\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
