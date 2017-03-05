@@ -6,6 +6,7 @@ namespace HappyMeter.Services
     public interface IEmotionService
     {
         void AddEmotion(InfoDTO infoDTO);
+        bool EmotionAllreadyComputed(InfoDTO infoDTO);
         List<InfoDTO> GetEmotionsPerCategory(string category);
     }
 }

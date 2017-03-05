@@ -1,10 +1,13 @@
 ﻿using CognitiveServiceProxy;
 using HappyMeter.Models;
+using HappyMeter.Models.Mapper;
 using HappyMeter.Services;
 using Newtonsoft.Json;
 using System;
 using System.Configuration;
 using System.IO;
+using System.Linq;
+using System.Threading;
 
 namespace HappyMeterConsoleTest
 {
@@ -12,6 +15,7 @@ namespace HappyMeterConsoleTest
     {
         private IServiceProxy _serviceProxy;
         private IEmotionService _emotionService;
+        private int _pauseParameter = 3100;
         public MainProgram(IServiceProxy serviceproxy, IEmotionService emotionService)
         {
             _serviceProxy = serviceproxy;
@@ -37,7 +41,7 @@ namespace HappyMeterConsoleTest
         private void ComputeEmotionsFromFolder()
         {
             if(!VerifyWebConfigVariables()) return;
-
+            var emotionMapper = new EmotionMapper();
 
             var apiCognitiveEmotionLink = ConfigurationManager.AppSettings["ApiCognitiveEmotionLink"].ToString();
             var apiContentType = ConfigurationManager.AppSettings["ApiContentType"].ToString();
@@ -51,20 +55,28 @@ namespace HappyMeterConsoleTest
             var files = Directory.GetFiles(sourceFolder);
             foreach (var file in files)
             {
-                Console.WriteLine(string.Format("Processing {0}", file));
-                byte[] imgdata = System.IO.File.ReadAllBytes(file);
-
-                var response = _serviceProxy.PostImageStream(imgdata);
-                FaceEmotion[] emotions = JsonConvert.DeserializeObject<FaceEmotion[]>(response);
+                Thread.Sleep(_pauseParameter);
                 string lastFolderName = Path.GetFileName(Path.GetDirectoryName(file));
-
                 InfoDTO dto = new InfoDTO()
                 {
-                    Emotions = emotions,
-                    Category = "Web",
+                    Category = lastFolderName,
                     Image = file
                 };
-                _emotionService.AddEmotion(dto);
+                Console.WriteLine(string.Format("Processing {0}", file));
+
+                if (!_emotionService.EmotionAllreadyComputed(dto))
+                {
+                    byte[] imgdata = System.IO.File.ReadAllBytes(file);
+                    var response = _serviceProxy.PostImageStream(imgdata);
+                    FaceEmotion[] emotions = JsonConvert.DeserializeObject<FaceEmotion[]>(response);
+
+                    var emotionDTOs = emotionMapper.GetEmotionDTOListFromEmotionList(emotions);
+                    if (emotionDTOs != null)
+                    {
+                        dto.Emotions = emotionDTOs.ToArray();
+                        _emotionService.AddEmotion(dto);
+                    }
+                }
             }
 
         }
@@ -72,7 +84,7 @@ namespace HappyMeterConsoleTest
         private void ComputeEmotionsFromLink()
         {
             if (!VerifyWebConfigVariables()) return;
-
+            var emotionMapper = new EmotionMapper();
             var apiCognitiveEmotionLink = ConfigurationManager.AppSettings["ApiCognitiveEmotionLink"].ToString();
             var apiContentType = ConfigurationManager.AppSettings["ApiContentType"].ToString();
             var apiKeyName = ConfigurationManager.AppSettings["ApiKeyName"].ToString();
@@ -93,11 +105,15 @@ namespace HappyMeterConsoleTest
   
             InfoDTO dto = new InfoDTO()
             {
-                Emotions = emotions,
                 Category = "Web",
                 Image = file
             };
-            _emotionService.AddEmotion(dto);
+            var emotionDTOs = emotionMapper.GetEmotionDTOListFromEmotionList(emotions);
+            if (emotionDTOs != null)
+            {
+                dto.Emotions = emotionDTOs.ToArray();
+                _emotionService.AddEmotion(dto);
+            }
         }
 
         private void ShowOptions()
@@ -105,6 +121,7 @@ namespace HappyMeterConsoleTest
             Console.WriteLine("Options: ");
             Console.WriteLine("1 - Compute emotions from folder: ");
             Console.WriteLine("2 - Compute emotions from link: ");
+            Console.WriteLine("3 - Import json files to MongoDb: ");
             Console.WriteLine("0 - Exit: ");
         }
 
