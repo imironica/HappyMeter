@@ -51,6 +51,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -60,6 +61,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MLService.cs" />
+    <Compile Include="IMLService.cs" />
     <Compile Include="IServiceProxy.cs" />
     <None Include="License" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,6 +70,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HappyMeter.Models\HappyMeter.Models.csproj">
+      <Project>{5a36fd35-1712-48a3-a05c-30be247e3713}</Project>
+      <Name>HappyMeter.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
