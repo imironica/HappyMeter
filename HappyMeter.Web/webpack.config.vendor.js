@@ -11,7 +11,7 @@ module.exports = (env) => {
         resolve: { extensions: [ '.js' ] },
         module: {
             rules: [
-                { test: /\.(png|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
+                { test: /\.(png|gif|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
             ]
         },
         entry: {
@@ -33,6 +33,10 @@ module.exports = (env) => {
                 'event-source-polyfill',
                 'jquery',
                 'zone.js',
+                'font-awesome/css/font-awesome.css',
+                'primeng/primeng',
+                'primeng/resources/themes/omega/theme.css',
+                'primeng/resources/primeng.min.css'
             ]
         },
         output: {

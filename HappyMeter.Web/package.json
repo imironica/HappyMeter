@@ -45,7 +45,9 @@
     "webpack": "^2.2.0",
     "webpack-hot-middleware": "^2.12.2",
     "webpack-merge": "^0.14.1",
-    "zone.js": "^0.7.6"
+    "zone.js": "^0.7.6",
+    "font-awesome": "^4.7.0",
+    "primeng": "^2.0.3"
   },
   "devDependencies": {
     "@types/chai": "^3.4.34",
