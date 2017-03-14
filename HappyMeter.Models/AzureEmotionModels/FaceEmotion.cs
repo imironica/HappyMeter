@@ -14,4 +14,5 @@ namespace HappyMeter.Models
         [JsonProperty(PropertyName = "scores")]
         public Score Scores { get; set; }
     }
+ 
 }

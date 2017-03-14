@@ -30,6 +30,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -44,12 +48,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AzureEmotionModels\FaceInfo.cs" />
+    <Compile Include="AzureEmotionModels\ObjectInfo.cs" />
     <Compile Include="DTO\Entity.cs" />
+    <Compile Include="DTO\FaceEmotionDTO.cs" />
+    <Compile Include="DTO\FaceInfoDTO.cs" />
+    <Compile Include="DTO\FaceRectangleDTO.cs" />
+    <Compile Include="DTO\ObjectInfoDTO.cs" />
+    <Compile Include="DTO\ScoreDTO.cs" />
     <Compile Include="Interfaces\IEmotionService.cs" />
     <Compile Include="DTO\InfoDTO.cs" />
-    <Compile Include="EmotionModels\FaceEmotion.cs" />
-    <Compile Include="EmotionModels\FaceRectangle.cs" />
-    <Compile Include="EmotionModels\Score.cs" />
+    <Compile Include="AzureEmotionModels\FaceEmotion.cs" />
+    <Compile Include="AzureEmotionModels\FaceRectangle.cs" />
+    <Compile Include="AzureEmotionModels\Score.cs" />
+    <Compile Include="Mapper\MLMapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

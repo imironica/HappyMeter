@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace HappyMeter.Services
@@ -19,7 +18,7 @@ namespace HappyMeter.Services
         {
             if (string.IsNullOrEmpty(ConfigurationManager.AppSettings["db"]) || string.IsNullOrEmpty(ConfigurationManager.AppSettings["dbIp"]))
             {
-                throw new Exception("Connection string to MongoDB is not provided in Web.Config");
+                throw new Exception("Connectionstring to MongoDB is not provided in Web.Config");
             }
             string dbName = ConfigurationManager.AppSettings["db"].ToString();
             string connectionString = ConfigurationManager.AppSettings["dbIp"].ToString();

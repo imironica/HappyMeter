@@ -1,9 +1,4 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HappyMeter.Models
 {
@@ -19,4 +14,5 @@ namespace HappyMeter.Models
         [JsonProperty(PropertyName = "width")]
         public int Width { get; set; }
     }
+ 
 }

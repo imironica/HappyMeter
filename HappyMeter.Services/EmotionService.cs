@@ -1,5 +1,6 @@
 ﻿using HappyMeter.Models;
 using System.Collections.Generic;
+using System;
 
 namespace HappyMeter.Services
 {
@@ -16,6 +17,11 @@ namespace HappyMeter.Services
             var repo = new MDRepository<InfoDTO>();
             var values = repo.GetAllList();
             return values;
+        }
+
+        public bool EmotionAllreadyComputed(InfoDTO infoDTO) 
+        {
+            throw new NotImplementedException();
         }
     }
 }

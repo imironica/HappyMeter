@@ -2,7 +2,7 @@
 {
     public class InfoDTO : Entity
     {
-        public FaceEmotion[] Emotions { get; set; }
+        public FaceEmotionDTO[] Emotions { get; set; }
         public string Image { get; set; }
         public string Category { get; set; }
     }
