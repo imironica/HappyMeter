@@ -20,7 +20,7 @@ namespace CognitiveServiceProxy
         private string _apiKeyFace;
         private string _apiKeyCV;
         private MLMapper _emotionMapper;
-
+        #endregion
         public MLService(IServiceProxy serviceProxy)
         {
             _serviceProxy = serviceProxy;
