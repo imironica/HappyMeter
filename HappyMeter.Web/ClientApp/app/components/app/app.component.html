@@ -1,10 +1,53 @@
-<div class='container-fluid'>
-    <div class='row'>
-        <div class='col-sm-3'>
-            <nav-menu></nav-menu>
-        </div>
-        <div class='col-sm-9 body-content'>
-            <router-outlet></router-outlet>
-        </div>
+<div class="wrapper skin-red-light">
+
+    <header class="main-header">
+        <!-- Logo -->
+        <a [routerLink]="['/home']" class="logo" style="text-align:left;">
+            <!-- logo for regular state and mobile devices -->
+            Happy Meter
+        </a>
+
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <navbar-menu></navbar-menu>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <sidebar-menu></sidebar-menu>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <router-outlet></router-outlet>
+
     </div>
+    <!-- /.content-wrapper -->
+
+
+    <footer class="main-footer">
+        <strong>Copyright &copy; The Serrifs 2017.</strong> All rights reserved.
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+            <li><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+        </ul>
+    </aside>
+
 </div>
+
+
+
+

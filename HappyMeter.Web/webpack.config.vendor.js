@@ -11,7 +11,7 @@ module.exports = (env) => {
         resolve: { extensions: [ '.js' ] },
         module: {
             rules: [
-                { test: /\.(png|gif|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
+                { test: /\.(png|jpg|gif|woff|woff2|eot|ttf|svg)(\?|$)/, use: 'url-loader?limit=100000' }
             ]
         },
         entry: {
@@ -36,7 +36,9 @@ module.exports = (env) => {
                 'font-awesome/css/font-awesome.css',
                 'primeng/primeng',
                 'primeng/resources/themes/omega/theme.css',
-                'primeng/resources/primeng.min.css'
+                'primeng/resources/primeng.min.css',
+                'admin-lte/dist/css/AdminLTE.min.css',
+                'admin-lte/dist/css/skins/skin-red-light.min.css'
             ]
         },
         output: {

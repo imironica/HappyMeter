@@ -7,6 +7,8 @@ import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { CounterComponent } from './components/counter/counter.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { SidebarMenuComponent } from './components/sidebarmenu/sidebarmenu.component';
 import { PrimeComponent } from './components/prime/prime.component';
 import { ButtonModule, GrowlModule } from 'primeng/primeng';
 
@@ -18,7 +20,9 @@ import { ButtonModule, GrowlModule } from 'primeng/primeng';
         CounterComponent,
         FetchDataComponent,
         HomeComponent,
-        PrimeComponent
+        PrimeComponent,
+        NavbarComponent,
+        SidebarMenuComponent,
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.

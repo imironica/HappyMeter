@@ -47,7 +47,8 @@
     "webpack-merge": "^0.14.1",
     "zone.js": "^0.7.6",
     "font-awesome": "^4.7.0",
-    "primeng": "^2.0.3"
+    "primeng": "^2.0.3",
+    "admin-lte": "^2.3.11"
   },
   "devDependencies": {
     "@types/chai": "^3.4.34",
