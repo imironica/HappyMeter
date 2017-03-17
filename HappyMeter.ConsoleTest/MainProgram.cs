@@ -26,7 +26,7 @@ namespace HappyMeterConsoleTest
         private IMLService _mlService;
         private int _pauseParameter = 3100;
         string endpointUri = "https://happy-meter.documents.azure.com:443/";
-        string primaryKey = "CPXWUmc2FzFbSZUeJnRic4GJ0KYigFcQYvtM6EFIsFDrAF76GXm2aFGACF1SUXlACJfommZk5e5kI64wJPZ5jg==";
+        string primaryKey = "";
 
         public MainProgram(IServiceProxy serviceproxy, IEmotionService emotionService, IMLService mlService)
         {
