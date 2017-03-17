@@ -13,7 +13,7 @@ namespace CognitiveServiceProxy
         private string _apiCognitiveEmotionLink;
         private string _apiCognitiveFaceLink;
         private string _apiCognitiveCVLink;
-        
+
         private string _apiContentType;
         private string _apiKeyName;
         private string _apiKeyEmotions;
@@ -71,6 +71,6 @@ namespace CognitiveServiceProxy
             var objDTO = _emotionMapper.GetObjectInfoDTOFromObjectInfo(objectInfo);
             return objDTO;
         }
-        
+
     }
 }
