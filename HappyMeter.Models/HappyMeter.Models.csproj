@@ -54,6 +54,7 @@
     <Compile Include="DTO\FaceEmotionDTO.cs" />
     <Compile Include="DTO\FaceInfoDTO.cs" />
     <Compile Include="DTO\FaceRectangleDTO.cs" />
+    <Compile Include="DTO\ImageInfoDTO.cs" />
     <Compile Include="DTO\ObjectInfoDTO.cs" />
     <Compile Include="DTO\ScoreDTO.cs" />
     <Compile Include="Interfaces\IEmotionService.cs" />

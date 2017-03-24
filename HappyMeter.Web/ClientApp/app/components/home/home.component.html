@@ -1,16 +1,104 @@
-<h1>Hello, world!</h1>
-<p>Welcome to your new single-page application, built with:</p>
-<ul>
-    <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-    <li><a href='https://angular.io/'>Angular 2</a> and <a href='http://www.typescriptlang.org/'>TypeScript</a> for client-side code</li>
-    <li><a href='https://webpack.github.io/'>Webpack</a> for building and bundling client-side resources</li>
-    <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-</ul>
-<p>To help you get started, we've also set up:</p>
-<ul>
-    <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-    <li><strong>Server-side prerendering</strong>. For faster initial loading and improved SEO, your Angular 2 app is prerendered on the server. The resulting HTML is then transferred to the browser where a client-side copy of the app takes over.</li>
-    <li><strong>Webpack dev middleware</strong>. In development mode, there's no need to run the <code>webpack</code> build tool. Your client-side resources are dynamically built on demand. Updates are available as soon as you modify any file.</li>
-    <li><strong>Hot module replacement</strong>. In development mode, you don't even need to reload the page after making most changes. Within seconds of saving changes to files, your Angular 2 app will be rebuilt and a new instance injected is into the page.</li>
-    <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and the <code>webpack</code> build tool produces minified static CSS and JavaScript files.</li>
-</ul>
+<script type="text/javascript" src="http://www.chartjs.org/assets/Chart.js">
+</script>
+<div class="box-body">
+    <div class="box-header with-border">
+        <h3>Endava photos</h3>
+    </div>
+
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">List of endava events</h3>
+        </div>
+        <table id="happinessTbl" class="table table-bordered table-hover" *ngIf="events">
+            <thead>
+                <tr>
+                    <th>Event name</th>
+                    <th>Happiness percent</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let event of events">
+                    <td><a (click)="showImagesInterface(event.category);" style="cursor:pointer;">{{event.category}}</a> </td>
+                    <td>
+                        <div class="progress progress-xs progress-striped active">
+                            <div class="progress-bar progress-bar-primary" [style.width.%]="event.happinessPercent"></div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-light-blue">{{event.happinessPercent}}%</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="nav-tabs-custom" style="clear:both">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#latest" data-toggle="tab">Last uploaded images</a></li>
+            <li><a href="#happiest" data-toggle="tab">Happiest images</a></li>
+            <li><a href="#mostsad" data-toggle="tab">Sadest images</a></li>
+        </ul>
+        <div class="tab-content col-md-12 col-sm-12">
+            <div class="active tab-pane" id="activity">
+                <div class="col-md-12 col-sm-12" *ngIf="lastImages">
+                    <div class="col-md-3 col-sm-10" *ngFor="let image of lastImages" style=" padding: 15px; margin: 15px; border: 1px solid #ddd;">
+                        <img [src]="'images/' +image.category + '/' + image.imageUrl" class="img-rounded" width="250" data-toggle="modal" data-target="#imgModal" style="cursor:pointer" (click)="viewImage(image.category,image.imageUrl);" /><hr style="clear:both" />
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="happiest">
+                <div class="col-md-9 col-sm-9" *ngIf="hapyiestImages">
+                    <div class="col-md-3 col-sm-10" *ngFor="let image of hapyiestImages" style=" padding: 5px; margin: 5px; border: 1px solid #ddd;">
+                        <img [src]="'images/' +image.category + '/' + image.imageUrl" class="img-rounded" width="250" data-toggle="modal" data-target="#imgModal" style="cursor:pointer" (click)="viewImage(image.category,image.imageUrl);" /><hr style="clear:both" />
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane" id="mostsad">
+                <div class="col-md-9 col-sm-9" *ngIf="mostSadImages">
+                    <div class="col-md-3 col-sm-10" *ngFor="let image of mostSadImages" style=" padding: 5px; margin: 5px; border: 1px solid #ddd;">
+                        <img [src]="'images/' +image.category + '/' + image.imageUrl" class="img-rounded" width="250" data-toggle="modal" data-target="#imgModal" style="cursor:pointer" (click)="viewImage(image.category,image.imageUrl);" /><hr style="clear:both" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="modal" id="imgModal">
+        <div class="modal-dialog">
+            <div class="modal-content col-md-12">
+                <div class="modal-header  col-md-12">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Image details</h4>
+                </div>
+                <div class="modal-body  col-md-12" *ngIf="currentImage">
+                    <img [src]="'images/' + currentImage.category + '/' + currentImage.imageUrl" class="img-rounded" width="400" /><hr style="clear:both" />
+                    <div style="clear:both"></div>
+                    <div style="text-align:left" class="col-md-12">
+                        <div *ngIf="currentImage.labels">
+                            Labels <div style="clear:both"></div>
+                            <span *ngFor="let label of currentImage.labels">
+                                <small class="label pull-left bg-blue" style="margin:2px;">{{label
+}}</small> &nbsp;  
+                            </span>
+                        </div>
+                        <div style="clear:both"></div>
+                        <small class="label pull-left bg-red" *ngIf="currentImage.adultContent === true" style="margin:2px;">Adult Content</small>
+                        <small class="label pull-left bg-green" *ngIf="currentImage.adultContent === false" style="margin:2px;">Non Adult Content</small>
+
+                        <small class="label pull-left bg-red" *ngIf="currentImage.racyContent === true" style="margin:2px;">Racy Content</small>
+                        <small class="label pull-left bg-green" *ngIf="currentImage.racyContent === false" style="margin:2px;">Non Racy Content</small>
+                        <div style="clear:both"></div>
+                        <div *ngIf="currentImage.imageEmotions">
+                            Emotions: <div style="clear:both"></div>
+                            <span *ngFor="let emotion of currentImage.imageEmotions">
+                                {{emotion.primaryEmotion}} {{emotion.primaryEmotionPercent}} <br />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

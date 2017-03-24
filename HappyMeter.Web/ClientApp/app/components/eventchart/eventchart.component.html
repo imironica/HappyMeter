@@ -1,0 +1,29 @@
+<div class="box-body">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">List of endava events</h3>
+        </div>
+        <table id="happinessTbl" class="table table-bordered table-hover" *ngIf="events">
+            <thead>
+                <tr>
+                    <th>Event name</th>
+                    <th>Happiness percent</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let event of events">
+                    <td><a (click)="showImagesInterface(event);" style="cursor:pointer;">{{event.category}}</a> </td>
+                    <td>
+                        <div class="progress progress-xs progress-striped active">
+                            <div class="progress-bar progress-bar-primary" [style.width.%]="event.happinessPercent"></div>
+                        </div>
+                    </td>
+                    <td><span class="badge bg-light-blue">{{event.happinessPercent}}%</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="box" *ngIf="data">
+            <p-chart type="bar" [data]="data"></p-chart>
+        </div>
+    </div>
+</div>

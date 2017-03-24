@@ -1,0 +1,38 @@
+<div class="box-body">
+    <div class="box">
+        <div class="box-header">
+            <h3 class="box-title">Mood table of the team</h3>
+        </div>
+        <table id="moodTable" class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th *ngFor="let value of header">
+                        {{value}}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let value of values">
+                    <td>{{ value[0] }}</td>
+                    <td>
+                        <img src="../icons/icontexto-emoticons-03-048x048.png" *ngIf="value[1]=='happy'" />
+                        <img src="../icons/icontexto-emoticons-14-048x048.png" *ngIf="value[1]=='sad'" />
+                        <img src="../icons/icontexto-emoticons-05-048x048.png" *ngIf="value[1]=='normal'" />
+
+                    </td>
+                    <td>
+                        <img src="../icons/icontexto-emoticons-03-048x048.png" *ngIf="value[2]=='happy'" />
+                        <img src="../icons/icontexto-emoticons-14-048x048.png" *ngIf="value[2]=='sad'" />
+                        <img src="../icons/icontexto-emoticons-05-048x048.png" *ngIf="value[2]=='normal'" />
+                    </td>
+                    <td>
+                        <img src="../icons/icontexto-emoticons-03-048x048.png" *ngIf="value[3]=='happy'" />
+                        <img src="../icons/icontexto-emoticons-14-048x048.png" *ngIf="value[3]=='sad'" />
+                        <img src="../icons/icontexto-emoticons-05-048x048.png" *ngIf="value[3]=='normal'" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

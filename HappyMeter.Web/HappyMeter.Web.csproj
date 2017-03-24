@@ -18,6 +18,229 @@
     <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
     <Content Remove="ClientApp\**" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-01-016x016.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-01-032x032.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-01-048x048.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-01-128x128.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-01-256x256.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-02-016x016.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-02-032x032.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-02-048x048.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-02-128x128.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-02-256x256.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-03-016x016.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-03-032x032.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-03-048x048.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-03-128x128.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-03-256x256.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-04-016x016.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-04-032x032.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-04-048x048.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-04-128x128.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-04-256x256.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-05-016x016.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-05-032x032.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-05-048x048.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-05-128x128.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-05-256x256.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-06-016x016.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-06-032x032.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-06-048x048.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-06-128x128.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-06-256x256.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-07-016x016.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-07-032x032.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-07-048x048.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-07-128x128.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-07-256x256.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-08-016x016.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-08-032x032.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-08-048x048.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-08-128x128.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-08-256x256.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-09-016x016.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-09-032x032.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-09-048x048.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-09-128x128.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-09-256x256.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-10-016x016.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-10-032x032.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-10-048x048.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-10-128x128.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-10-256x256.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-11-016x016.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-11-032x032.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-11-048x048.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-11-128x128.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-11-256x256.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-12-016x016.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-12-032x032.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-12-048x048.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-12-128x128.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-12-256x256.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-13-016x016.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-13-032x032.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-13-048x048.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-13-128x128.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-13-256x256.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-14-016x016.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-14-032x032.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-14-048x048.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-14-128x128.png" />
+    <Content Include="ClientApp\app\components\icons\icontexto-emoticons-14-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-01-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-01-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-01-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-01-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-01-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-02-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-02-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-02-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-02-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-02-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-03-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-03-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-03-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-03-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-03-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-04-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-04-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-04-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-04-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-04-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-05-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-05-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-05-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-05-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-05-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-06-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-06-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-06-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-06-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-06-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-07-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-07-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-07-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-07-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-07-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-08-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-08-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-08-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-08-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-08-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-09-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-09-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-09-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-09-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-09-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-10-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-10-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-10-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-10-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-10-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-11-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-11-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-11-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-11-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-11-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-12-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-12-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-12-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-12-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-12-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-13-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-13-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-13-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-13-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-13-256x256.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-14-016x016.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-14-032x032.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-14-048x048.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-14-128x128.png" />
+    <Content Include="wwwroot\icons\icontexto-emoticons-14-256x256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\images\1.jpg" />
+    <None Include="wwwroot\images\2.jpg" />
+    <None Include="wwwroot\images\3.jpg" />
+    <None Include="wwwroot\images\4.jpg" />
+    <None Include="wwwroot\images\5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HappyMeter.Model\HappyMeter.Model.csproj" />
+    <ProjectReference Include="..\HappyMeter.Service\HappyMeter.Service.csproj" />
+  </ItemGroup>
   <Target Name="RunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
     <Exec Command="npm install" />

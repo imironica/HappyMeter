@@ -4,11 +4,17 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using Newtonsoft.Json;
+using System.Linq;
 
 namespace HappyMeter.Services
 {
-    class EmotionFileService : IEmotionService
+    public class EmotionFileService : IEmotionService
     {
+        public EmotionFileService()
+        {
+
+        }
+
         public bool EmotionAllreadyComputed(InfoDTO infoDTO)
         {
             var saveFolder = ConfigurationManager.AppSettings["SaveFolder"].ToString();
@@ -29,10 +35,25 @@ namespace HappyMeter.Services
             var emotionStr = JsonConvert.SerializeObject(infoDTO);
             File.WriteAllText(filename, emotionStr);
         }
-
+        public void AddEmotion(ImageInfoDTO infoDTO)
+        {
+            var saveFolder = ConfigurationManager.AppSettings["SaveFolder"].ToString();
+            var folder = Path.Combine(saveFolder, infoDTO.Category);
+            if (!Directory.Exists(folder))
+                Directory.CreateDirectory(folder);
+            var filename = Path.Combine(folder, Path.GetFileName(infoDTO.ImageUrl)) + ".txt";
+            var emotionStr = JsonConvert.SerializeObject(infoDTO);
+            File.WriteAllText(filename, emotionStr);
+        }
         public List<InfoDTO> GetEmotionsPerCategory(string category)
         {
             throw new NotImplementedException();
+        }
+
+        public List<string> GetCategories()
+        {
+            string[] categories = new string[] { "Halloween BHD" };
+            return categories.ToList();
         }
     }
  

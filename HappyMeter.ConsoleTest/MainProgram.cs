@@ -24,14 +24,18 @@ namespace HappyMeterConsoleTest
     {
         private IEmotionService _emotionService;
         private IMLService _mlService;
-        private int _pauseParameter = 3100;
-        string endpointUri = "https://happy-meter.documents.azure.com:443/";
-        string primaryKey = "";
+        private int _pauseParameter = 1;
+        string _db = "happy-meter";
+        string _collection = "faces-happy-meter";
+        string _endpointUri = "";
+        string _primaryKey = "";
 
         public MainProgram(IServiceProxy serviceproxy, IEmotionService emotionService, IMLService mlService)
         {
             _emotionService = emotionService;
             _mlService = mlService;
+            _endpointUri = ConfigurationManager.AppSettings["endpointUri"].ToString();
+            _primaryKey = ConfigurationManager.AppSettings["primaryKey"].ToString();
         }
 
         public void Run()
@@ -52,13 +56,65 @@ namespace HappyMeterConsoleTest
                 if (option == "4")
                     ComputeObjectsFromFolder();
                 if (option == "5")
+                    ComputeAllCharacteristicsFromFolder();
+                if (option == "6")
                     ComputeEmotionsFromFolderInDocumentDb();
-
             }
         }
 
+        private void ComputeAllCharacteristicsFromFolder()
+        {
+            if (!VerifyWebConfigVariables()) return;
 
+            var emotionMapper = new MLMapper();
+            var sourceFolder = ConfigurationManager.AppSettings["SourceFolder"].ToString();
+            var saveFolder = ConfigurationManager.AppSettings["SaveFolder"].ToString();
 
+            string[] dirs = Directory.GetDirectories(sourceFolder);
+            foreach (var dir in dirs)
+            {
+                string[] files = Directory.GetFiles(dir);
+                Parallel.ForEach(files, new ParallelOptions { MaxDegreeOfParallelism = 4 }, (file) =>
+                {
+                    var mlService = new MLService(new ServiceProxyCognitiveAzure());
+                    string lastFolderName = Path.GetFileName(Path.GetDirectoryName(file));
+                    string fileName = Path.GetFileName(file);
+                    Console.WriteLine(string.Format("Processing {0}", file));
+                    byte[] imgdata = System.IO.File.ReadAllBytes(file);
+                    FaceEmotionDTO[] emotionDTOs = mlService.GetEmotionsFromImage(imgdata);
+
+                    if (emotionDTOs != null && emotionDTOs.Count() > 0)
+                    {
+                        FaceInfoDTO[] faceInfo = mlService.GetFacesFromImage(imgdata);
+                        ObjectInfoDTO objectsDTOs = mlService.GetObjectsFromImage(imgdata);
+
+                        var imageinfo = new ImageInfoDTO()
+                        {
+                            Emotions = emotionDTOs,
+                            Faces = faceInfo,
+                            Objects = objectsDTOs,
+                            Category = lastFolderName,
+                            ImageUrl = fileName,
+                            Anger = emotionDTOs.Average(x => x.Scores != null ? x.Scores.Anger : 0),
+                            Contempt = emotionDTOs.Average(x => x.Scores != null ? x.Scores.Contempt : 0),
+                            Disgust = emotionDTOs.Average(x => x.Scores != null ? x.Scores.Disgust : 0),
+                            Fear = emotionDTOs.Average(x => x.Scores != null ? x.Scores.Fear : 0),
+                            Happiness = emotionDTOs.Average(x => x.Scores != null ? x.Scores.Happiness : 0),
+                            Neutral = emotionDTOs.Average(x => x.Scores != null ? x.Scores.Neutral : 0),
+                            Sadness = emotionDTOs.Average(x => x.Scores != null ? x.Scores.Sadness : 0),
+                            Surprise = emotionDTOs.Average(x => x.Scores != null ? x.Scores.Surprise : 0)
+                        };
+
+                        if (imageinfo != null)
+                        {
+                            _emotionService.AddEmotion(imageinfo);
+                        }
+                        Thread.Sleep(_pauseParameter);
+                    }
+                }
+                );
+            }
+        }
 
         private void ComputeEmotionsFromFolder()
         {
@@ -187,7 +243,8 @@ namespace HappyMeterConsoleTest
             Console.WriteLine("2 - Compute emotions from link: ");
             Console.WriteLine("3 - Compute face characteristics from folder: ");
             Console.WriteLine("4 - Compute objects from folder: ");
-            Console.WriteLine("5 - Import emotions to DocumentDb: ");
+            Console.WriteLine("5 - Compute all characteristics from folder: ");
+            Console.WriteLine("6 - Insert to DocumentDb: ");
             Console.WriteLine("0 - Exit: ");
         }
 
@@ -242,19 +299,15 @@ namespace HappyMeterConsoleTest
             return valid;
         }
 
-
         private async Task CreateDatabaseIfNotExists(string databaseName)
         {
-            string endpointUri = "https://happy-meter.documents.azure.com:443/";
-            string primaryKey = "CPXWUmc2FzFbSZUeJnRic4GJ0KYigFcQYvtM6EFIsFDrAF76GXm2aFGACF1SUXlACJfommZk5e5kI64wJPZ5jg==";
             DocumentClient client;
-            client = new DocumentClient(new Uri(endpointUri), primaryKey);
+            client = new DocumentClient(new Uri(_endpointUri), _primaryKey);
 
             // Check to verify a database with the id=FamilyDB does not exist
             try
             {
                 await client.ReadDatabaseAsync(UriFactory.CreateDatabaseUri(databaseName));
-                //this.WriteToConsoleAndPromptToContinue("Found {0}", databaseName);
             }
             catch (DocumentClientException de)
             {
@@ -262,7 +315,6 @@ namespace HappyMeterConsoleTest
                 if (de.StatusCode == HttpStatusCode.NotFound)
                 {
                     await client.CreateDatabaseAsync(new Database { Id = databaseName });
-                    //this.WriteToConsoleAndPromptToContinue("Created {0}", databaseName);
                 }
                 else
                 {
@@ -274,12 +326,10 @@ namespace HappyMeterConsoleTest
         private async Task CreateDocumentCollectionIfNotExists(string databaseName, string collectionName)
         {
             DocumentClient client;
-            client = new DocumentClient(new Uri(endpointUri), primaryKey);
-
+            client = new DocumentClient(new Uri(_endpointUri), _primaryKey);
             try
             {
                 await client.ReadDocumentCollectionAsync(UriFactory.CreateDocumentCollectionUri(databaseName, collectionName));
-                //this.WriteToConsoleAndPromptToContinue("Found {0}", collectionName);
             }
             catch (DocumentClientException de)
             {
@@ -297,8 +347,6 @@ namespace HappyMeterConsoleTest
                         UriFactory.CreateDatabaseUri(databaseName),
                         collectionInfo,
                         new RequestOptions { OfferThroughput = 400 });
-
-                    //this.WriteToConsoleAndPromptToContinue("Created {0}", collectionName);
                 }
                 else
                 {
@@ -306,69 +354,65 @@ namespace HappyMeterConsoleTest
                 }
             }
         }
-        private void WriteToConsoleAndPromptToContinue(string format, params object[] args)
-        {
-            Console.WriteLine(format, args);
-            Console.WriteLine("Press any key to continue ...");
-            Console.ReadKey();
-        }
 
         private async Task<Document> AddElementToDocumentDb(string databaseName, string collectionName, InfoDTO emotions)
         {
             DocumentClient client;
-            client = new DocumentClient(new Uri(endpointUri), primaryKey);
+            client = new DocumentClient(new Uri(_endpointUri), _primaryKey);
             var result = await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(databaseName, collectionName), emotions);
             var document = result.Resource;
             return result;
         }
 
-        
+        private static readonly ConnectionPolicy ConnectionPolicy = new ConnectionPolicy
+        {
+            ConnectionMode = ConnectionMode.Direct,
+            ConnectionProtocol = Protocol.Tcp,
+            RequestTimeout = new TimeSpan(1, 0, 0),
+            MaxConnectionLimit = 1000,
+            RetryOptions = new RetryOptions
+            {
+                MaxRetryAttemptsOnThrottledRequests = 10,
+                MaxRetryWaitTimeInSeconds = 60
+            }
+        };
 
         private void ComputeEmotionsFromFolderInDocumentDb()
         {
-            var db = "happy-meter";
-            var collection = "faces-happy-meter";
-            //CreateDatabaseIfNotExists(db).Wait();
-            //CreateDocumentCollectionIfNotExists(db, collection).Wait();
-
-            
+            CreateDatabaseIfNotExists(_db).Wait();
+            CreateDocumentCollectionIfNotExists(_db, _collection).Wait();
+            var collectionLink = UriFactory.CreateDocumentCollectionUri(_db, _collection);
             DocumentClient client;
-            client = new DocumentClient(new Uri(endpointUri), primaryKey);
-            var emotionMapper = new MLMapper();
 
+            var emotionMapper = new MLMapper();
             var sourceFolder = ConfigurationManager.AppSettings["SourceFolder"].ToString();
             var saveFolder = ConfigurationManager.AppSettings["SaveFolder"].ToString();
+            string[] dirs = Directory.GetDirectories(saveFolder);
+            string category = Path.GetFileName(Path.GetDirectoryName(saveFolder));
 
-            var files = Directory.GetFiles(sourceFolder);
-            int index = 1;
-            string username = "username";
-            while (true)
+            using (client = new DocumentClient(new Uri(_endpointUri), _primaryKey, ConnectionPolicy))
             {
-                var dto = new InfoDTO()
+                foreach (var dir in dirs)
                 {
-                    Category = username,
-                    Image = index.ToString(),
-                    CreatedAt = DateTime.Now,
-                    Id = Guid.NewGuid()
-                };
-                Console.WriteLine(string.Format("Processing {0}", index.ToString()));
-
-                Thread.Sleep(_pauseParameter);
-                byte[] imgdata = TakeImageFromLocalCamera();
-                FaceEmotionDTO[] emotionDTOs = _mlService.GetEmotionsFromImage(imgdata);
-
-                if (emotionDTOs != null)
-                {
-                    dto.Emotions = emotionDTOs.ToArray();
-                    if (dto.Emotions.Length > 0)
+                    string[] files = Directory.GetFiles(dir);
+                    foreach (var file in files)
                     {
-                        AddElementToDocumentDb(db, collection, dto).Wait();
+
+                        var imageStr = File.ReadAllText(file);
+                        ImageInfoDTO objectInfo = JsonConvert.DeserializeObject<ImageInfoDTO>(imageStr);
+                        objectInfo.Id = Path.GetFileName(objectInfo.ImageUrl);
+
+                        Console.WriteLine(objectInfo.Id);
+                        AddDocument(client, _db, _collection, objectInfo).Wait();
                     }
                 }
 
-                index++;
             }
+        }
 
+        private async Task AddDocument(DocumentClient client, string databaseName, string collectionName, ImageInfoDTO dto)
+        {
+            await client.CreateDocumentAsync(UriFactory.CreateDocumentCollectionUri(databaseName, collectionName), dto);
         }
 
         private byte[] TakeImageFromLocalCamera()
@@ -382,5 +426,6 @@ namespace HappyMeterConsoleTest
             ImageConverter converter = new ImageConverter();
             return (byte[])converter.ConvertTo(img, typeof(byte[]));
         }
+
     }
 }
