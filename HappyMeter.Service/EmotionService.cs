@@ -47,6 +47,51 @@ namespace HappyMeter.Service
             return lstImages.Select(x => new ImageGridDTO { Category = x.Category, ImageUrl = x.ImageUrl, Id = x.Id }).ToList();
         }
 
+        public async Task<List<ImageGridDTO>> SearchImages(QuerySearchRequest options)
+        {
+            var _repository = new Repository<ImageInfoDTO>();
+            var sql = string.Format("SELECT * FROM c ");
+            var lstImages = await _repository.FindMultiple(sql, "faces-happy-meter");
+
+            var lstReturnedImages = new List<ImageGridDTO>();
+            int count = 0;
+            foreach (var image in lstImages)
+            {
+                var valid = true;
+                var faceAttributes = image.Faces.Select(x => x.FaceAttributes);
+
+                if (options.Age > 0)
+                {
+                    if (!faceAttributes.Any(x => x.Age >= options.Age - 1 && x.Age <= options.Age + 1))
+                        valid = false;
+                }
+
+                if (!faceAttributes.Any(x => x.Gender.Equals(options.Gender,StringComparison.CurrentCultureIgnoreCase)))
+                    valid = false;
+                if (!faceAttributes.Any(x => x.Glasses.Equals(options.Glasses, StringComparison.CurrentCultureIgnoreCase)))
+                    valid = false;
+
+                if (options.Smile.Equals("yes", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    if(!faceAttributes.Any(x => x.Smile > 0.1))
+                    valid = false;
+                }
+
+                if (valid)
+                {
+                    lstReturnedImages.Add(new ImageGridDTO
+                    {
+                        Category = image.Category,
+                        ImageUrl = image.ImageUrl,
+                        Id = image.Id
+                    });
+                    count++;
+                }
+                if (count > 50)
+                    return lstReturnedImages;
+            }
+            return lstReturnedImages;
+        }
 
         public async Task<ImageDTO> GetImage(string category, string id)
         {

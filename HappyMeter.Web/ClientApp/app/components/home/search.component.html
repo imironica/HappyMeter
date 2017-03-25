@@ -1,0 +1,113 @@
+<script type="text/javascript" src="http://www.chartjs.org/assets/Chart.js">
+</script>
+<div class="box-body">
+    <div class="box-header with-border">
+        <h3>Search in Endava photos</h3>
+    </div>
+
+    <div class="box">
+        <form id="search">
+            <div class="form-group">
+                <div class="col-md-6">
+                    <div style="clear:both">
+                        <label>Age</label>
+                    </div>
+                     <input type="text" id="age" name="age"  [(ngModel)]="age"  class="form-control"  />  
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <div style="clear:both">
+                        <label>Gender</label>
+                    </div>
+                    <select id="gender" name="gender" [(ngModel)]="gender"  class="form-control" >
+                        <option value="female">female</option>
+                        <option value="male">male</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <div style="clear:both">
+                        <label>Smile</label>
+                    </div>
+                    <select id="smile" name="smile" [(ngModel)]="smile"  class="form-control" >
+                        <option value="yes">yes</option>
+                        <option value="no">no</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-6">
+                    <div style="clear:both">
+                        <label>Glasses</label>
+                    </div>
+                    <select id="glasses" name="glasses" [(ngModel)]="glasses"  class="form-control" >
+                        <option value="ReadingGlasses">yes</option>
+                        <option value="NoGlasses">no</option>
+                    </select>
+                </div>
+            </div>
+           
+            <div class="box-body">
+                <div class="form-group" style="clear:both; padding:10px;">
+                    <button type="button" (click)="searchImages();" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+    <div class="nav-tabs-custom" style="clear:both">
+        <div class="tab-content col-md-12 col-sm-12">
+            <div class="active tab-pane" id="activity">
+                <div class="col-md-12 col-sm-12" *ngIf="listImages">
+                    <div class="col-md-3 col-sm-10" *ngFor="let image of listImages" style=" padding: 15px; margin: 15px; border: 1px solid #ddd;">
+                        <img [src]="'images/' +image.category + '/' + image.imageUrl" class="img-rounded" width="250" data-toggle="modal" data-target="#imgModal" style="cursor:pointer" (click)="viewImage(image.category,image.imageUrl);" /><hr style="clear:both" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="modal" id="imgModal">
+        <div class="modal-dialog">
+            <div class="modal-content col-md-12">
+                <div class="modal-header  col-md-12">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title">Image details</h4>
+                </div>
+                <div class="modal-body  col-md-12" *ngIf="currentImage">
+                    <img [src]="'images/' + currentImage.category + '/' + currentImage.imageUrl" class="img-rounded" width="400" /><hr style="clear:both" />
+                    <div style="clear:both"></div>
+                    <div style="text-align:left" class="col-md-12">
+                        <div *ngIf="currentImage.labels">
+                            Labels <div style="clear:both"></div>
+                            <span *ngFor="let label of currentImage.labels">
+                                <small class="label pull-left bg-blue" style="margin:2px;">{{label}}</small> &nbsp;
+                            </span>
+                        </div>
+                        <div style="clear:both"></div>
+                        <small class="label pull-left bg-red" *ngIf="currentImage.adultContent === true" style="margin:2px;">Adult Content</small>
+                        <small class="label pull-left bg-green" *ngIf="currentImage.adultContent === false" style="margin:2px;">Non Adult Content</small>
+
+                        <small class="label pull-left bg-red" *ngIf="currentImage.racyContent === true" style="margin:2px;">Racy Content</small>
+                        <small class="label pull-left bg-green" *ngIf="currentImage.racyContent === false" style="margin:2px;">Non Racy Content</small>
+                        <div style="clear:both"></div>
+                        <div *ngIf="currentImage.imageEmotions">
+                            Emotions: <div style="clear:both"></div>
+                            <span *ngFor="let emotion of currentImage.imageEmotions">
+                                {{emotion.primaryEmotion}} {{emotion.primaryEmotionPercent}} <br />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

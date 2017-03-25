@@ -4,6 +4,7 @@ import { UniversalModule } from 'angular2-universal';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './components/app/app.component'
 import { HomeComponent } from './components/home/home.component';
+import { SearchComponent } from './components/home/search.component';
 import { FetchDataComponent } from './components/fetchdata/fetchdata.component';
 import { EventChartComponent } from './components/eventchart/eventchart.component';
 import { MoodChartComponent } from './components/moodchart/moodchart.component';
@@ -26,7 +27,8 @@ import { ChartModule } from 'primeng/primeng';
         SidebarMenuComponent,
         MoodChartComponent,
         TeamComponent,
-        ImageAnalizerComponent
+        ImageAnalizerComponent,
+        SearchComponent
     ],
     imports: [
         UniversalModule, // Must be first import. This automatically imports BrowserModule, HttpModule, and JsonpModule too.
@@ -34,6 +36,7 @@ import { ChartModule } from 'primeng/primeng';
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
             { path: 'event-chart', component: EventChartComponent },
+            { path: 'search', component: SearchComponent },
             { path: 'mood-chart', component: MoodChartComponent },
             { path: 'team', component: TeamComponent },
             { path: 'imageanalizer', component: ImageAnalizerComponent },
