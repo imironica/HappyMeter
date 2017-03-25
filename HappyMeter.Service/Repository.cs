@@ -30,8 +30,8 @@ namespace HappyMeter.Service
         public Repository()
         {
             _db = "happy-meter";
-            _endpointUri = "";
-            _primaryKey = "";
+            _endpointUri = "https://happymeter.documents.azure.com:443/";
+            _primaryKey = "2zFH2PKIMm9kPp84PTvQKU7RqW18eToauaNuoXQs6UlBJZlFTpJc0tryVZxKNZDv2xFyWr6unkeFrtCHJZzegw==";
         }
 
         public bool InsertOne(T insertedObject)

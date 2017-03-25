@@ -30,10 +30,15 @@ namespace HappyMeter_Web.Controllers
         }
 
         [HttpPost("[action]")]
-        
         public async Task<IEnumerable<ImageGridDTO>> GetImagesPerCategory([FromBody]ImageGridRequest request)
         {
             return await _emotionService.GetEmotionsPerCategory(request.Option, request.Category);
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IEnumerable<ImageGridDTO>> SearchImage([FromBody]QuerySearchRequest request)
+        {
+            return await _emotionService.SearchImages(request);
         }
 
         [HttpPost("[action]")]
@@ -54,4 +59,5 @@ namespace HappyMeter_Web.Controllers
         public string Category { get; set; }
     }
     
+
 }

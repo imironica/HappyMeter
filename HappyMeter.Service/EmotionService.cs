@@ -18,7 +18,7 @@ namespace HappyMeter.Service
 
         }
 
-        
+
         private static readonly ConnectionPolicy ConnectionPolicy = new ConnectionPolicy
         {
             ConnectionMode = ConnectionMode.Direct,
@@ -47,6 +47,51 @@ namespace HappyMeter.Service
             return lstImages.Select(x => new ImageGridDTO { Category = x.Category, ImageUrl = x.ImageUrl, Id = x.Id }).ToList();
         }
 
+        public async Task<List<ImageGridDTO>> SearchImages(QuerySearchRequest options)
+        {
+            var _repository = new Repository<ImageInfoDTO>();
+            var sql = string.Format("SELECT * FROM c ");
+            var lstImages = await _repository.FindMultiple(sql, "faces-happy-meter");
+
+            var lstReturnedImages = new List<ImageGridDTO>();
+            int count = 0;
+            foreach (var image in lstImages)
+            {
+                var valid = true;
+                var faceAttributes = image.Faces.Select(x => x.FaceAttributes);
+
+                if (options.Age > 0)
+                {
+                    if (!faceAttributes.Any(x => x.Age >= options.Age - 1 && x.Age <= options.Age + 1))
+                        valid = false;
+                }
+
+                if (!faceAttributes.Any(x => x.Gender.Equals(options.Gender,StringComparison.CurrentCultureIgnoreCase)))
+                    valid = false;
+                if (!faceAttributes.Any(x => x.Glasses.Equals(options.Glasses, StringComparison.CurrentCultureIgnoreCase)))
+                    valid = false;
+
+                if (options.Smile.Equals("yes", StringComparison.CurrentCultureIgnoreCase))
+                {
+                    if(!faceAttributes.Any(x => x.Smile > 0.1))
+                    valid = false;
+                }
+
+                if (valid)
+                {
+                    lstReturnedImages.Add(new ImageGridDTO
+                    {
+                        Category = image.Category,
+                        ImageUrl = image.ImageUrl,
+                        Id = image.Id
+                    });
+                    count++;
+                }
+                if (count > 50)
+                    return lstReturnedImages;
+            }
+            return lstReturnedImages;
+        }
 
         public async Task<ImageDTO> GetImage(string category, string id)
         {
@@ -145,12 +190,12 @@ namespace HappyMeter.Service
             var results = from p in lstTempCategories
                           group p by p.Category into g
                           select new CategoryGridDTO()
-                                    {
-                                         Category = g.Key,
-                                         HappinessPercent = Math.Round(g.Average(x => x.HappinessPercent) * 100, 2)
+                          {
+                              Category = g.Key,
+                              HappinessPercent = Math.Round(g.Average(x => x.HappinessPercent) * 100, 2)
                           };
 
-            return results.OrderByDescending(x=>x.HappinessPercent).ToList();
+            return results.OrderByDescending(x => x.HappinessPercent).ToList();
         }
 
         public async Task<List<CategoryGridDTO>> GetCategoriesChart()
@@ -167,7 +212,7 @@ namespace HappyMeter.Service
                 "                           c.Surprise, " +
                 "                           c.Neutral  " +
                 "FROM c");
-             
+
             var lstCategories = await _repository.FindMultipleDynamic(sql, "faces-happy-meter");
             var lstTempCategories = new List<CategoryGridDTO>();
 
@@ -191,13 +236,13 @@ namespace HappyMeter.Service
                           select new CategoryGridDTO()
                           {
                               Category = g.Key,
-                              HappinessPercent = Math.Round(g.Average(x => x.HappinessPercent) * 100, 2) ,
-                              AngerPercent = Math.Round(g.Average(x => x.AngerPercent) * 100, 2) ,
-                              FearPercent = Math.Round(g.Average(x => x.FearPercent) * 100, 2) ,
-                              SadnessPercent = Math.Round(g.Average(x => x.SadnessPercent) * 100, 2) ,
-                              SurprizePercent = Math.Round(g.Average(x => x.SurprizePercent) * 100, 2) ,
-                              NeutralPercent = Math.Round(g.Average(x => x.NeutralPercent) * 100, 2) ,
-                              ContemptPercent = Math.Round(g.Average(x => x.ContemptPercent) * 100, 2) 
+                              HappinessPercent = Math.Round(g.Average(x => x.HappinessPercent) * 100, 2),
+                              AngerPercent = Math.Round(g.Average(x => x.AngerPercent) * 100, 2),
+                              FearPercent = Math.Round(g.Average(x => x.FearPercent) * 100, 2),
+                              SadnessPercent = Math.Round(g.Average(x => x.SadnessPercent) * 100, 2),
+                              SurprizePercent = Math.Round(g.Average(x => x.SurprizePercent) * 100, 2),
+                              NeutralPercent = Math.Round(g.Average(x => x.NeutralPercent) * 100, 2),
+                              ContemptPercent = Math.Round(g.Average(x => x.ContemptPercent) * 100, 2)
                           };
 
             return results.OrderByDescending(x => x.HappinessPercent).ToList();
