@@ -16,6 +16,7 @@ namespace HappyMeter.Model
         public bool AdultContent { get; set; }
         public bool RacyContent { get; set; }
         public ImageEmotionDTO[] ImageEmotions { get; set; }
+        public FaceRectangleDTO[] FaceRectangles { get; set; }
     }
 
     public class ImageEmotionDTO

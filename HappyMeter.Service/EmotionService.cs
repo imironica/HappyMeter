@@ -18,7 +18,7 @@ namespace HappyMeter.Service
 
         }
 
-        
+
         private static readonly ConnectionPolicy ConnectionPolicy = new ConnectionPolicy
         {
             ConnectionMode = ConnectionMode.Direct,
@@ -64,15 +64,16 @@ namespace HappyMeter.Service
 
             };
             var lstEmotions = new List<ImageEmotionDTO>();
+            var lstFaceRectangle = new List<FaceRectangleDTO>();
             foreach (var emotion in img.Emotions)
             {
                 ImageEmotionDTO emotionDTO = new ImageEmotionDTO();
+
                 double[] emotionScores = { emotion.Scores.Anger,
                                     emotion.Scores.Contempt,
                                     emotion.Scores.Disgust,
                                     emotion.Scores.Fear,
                                     emotion.Scores.Happiness,
-                                    emotion.Scores.Neutral,
                                     emotion.Scores.Sadness,
                                     emotion.Scores.Surprise };
                 var maxEmotionValue = emotionScores.Max();
@@ -119,8 +120,10 @@ namespace HappyMeter.Service
                 }
 
                 lstEmotions.Add(emotionDTO);
+                lstFaceRectangle.Add(emotion.FaceRectangle);
             }
             imageDTO.ImageEmotions = lstEmotions.ToArray();
+            imageDTO.FaceRectangles = lstFaceRectangle.ToArray();
 
             return imageDTO;
         }
@@ -145,12 +148,12 @@ namespace HappyMeter.Service
             var results = from p in lstTempCategories
                           group p by p.Category into g
                           select new CategoryGridDTO()
-                                    {
-                                         Category = g.Key,
-                                         HappinessPercent = Math.Round(g.Average(x => x.HappinessPercent) * 100, 2)
+                          {
+                              Category = g.Key,
+                              HappinessPercent = Math.Round(g.Average(x => x.HappinessPercent) * 100, 2)
                           };
 
-            return results.OrderByDescending(x=>x.HappinessPercent).ToList();
+            return results.OrderByDescending(x => x.HappinessPercent).ToList();
         }
 
         public async Task<List<CategoryGridDTO>> GetCategoriesChart()
@@ -167,7 +170,7 @@ namespace HappyMeter.Service
                 "                           c.Surprise, " +
                 "                           c.Neutral  " +
                 "FROM c");
-             
+
             var lstCategories = await _repository.FindMultipleDynamic(sql, "faces-happy-meter");
             var lstTempCategories = new List<CategoryGridDTO>();
 
@@ -191,13 +194,13 @@ namespace HappyMeter.Service
                           select new CategoryGridDTO()
                           {
                               Category = g.Key,
-                              HappinessPercent = Math.Round(g.Average(x => x.HappinessPercent) * 100, 2) ,
-                              AngerPercent = Math.Round(g.Average(x => x.AngerPercent) * 100, 2) ,
-                              FearPercent = Math.Round(g.Average(x => x.FearPercent) * 100, 2) ,
-                              SadnessPercent = Math.Round(g.Average(x => x.SadnessPercent) * 100, 2) ,
-                              SurprizePercent = Math.Round(g.Average(x => x.SurprizePercent) * 100, 2) ,
-                              NeutralPercent = Math.Round(g.Average(x => x.NeutralPercent) * 100, 2) ,
-                              ContemptPercent = Math.Round(g.Average(x => x.ContemptPercent) * 100, 2) 
+                              HappinessPercent = Math.Round(g.Average(x => x.HappinessPercent) * 100, 2),
+                              AngerPercent = Math.Round(g.Average(x => x.AngerPercent) * 100, 2),
+                              FearPercent = Math.Round(g.Average(x => x.FearPercent) * 100, 2),
+                              SadnessPercent = Math.Round(g.Average(x => x.SadnessPercent) * 100, 2),
+                              SurprizePercent = Math.Round(g.Average(x => x.SurprizePercent) * 100, 2),
+                              NeutralPercent = Math.Round(g.Average(x => x.NeutralPercent) * 100, 2),
+                              ContemptPercent = Math.Round(g.Average(x => x.ContemptPercent) * 100, 2)
                           };
 
             return results.OrderByDescending(x => x.HappinessPercent).ToList();
